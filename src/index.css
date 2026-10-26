@@ -1,0 +1,68 @@
+:root {
+  /* 화면 좌우 여백: 작은 폰에서는 16px, 일반 폰은 20px */
+  --gutter: clamp(16px, 5.3vw, 20px);
+
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #191f28;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color-scheme: light;
+  background: var(--page, #ffffff);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+#app,
+#root,
+my-element {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  isolation: isolate;
+  padding: env(safe-area-inset-top) calc(var(--gutter) + env(safe-area-inset-right)) 0
+    calc(var(--gutter) + env(safe-area-inset-left));
+}
+
+/* 태블릿·데스크톱에서는 가운데 모바일 폭으로 보여준다 */
+@media (min-width: 481px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f5f5f5;
+  }
+
+  #app,
+  #root,
+  my-element {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: var(--page, #ffffff);
+  }
+}

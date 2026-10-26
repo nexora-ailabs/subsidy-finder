@@ -1,0 +1,603 @@
+body {
+  color: var(--ink);
+}
+
+.muted {
+  color: var(--grey500);
+}
+
+.text-link.is-small {
+  padding: 4px 0;
+  font-size: 12px;
+}
+
+/* ===== 로딩 회색 틀 ===== */
+.skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.skeleton {
+  display: block;
+  border-radius: var(--rounded-md);
+  background: linear-gradient(90deg, var(--grey100) 25%, var(--grey200) 50%, var(--grey100) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-title {
+  width: 60%;
+  height: 28px;
+  border-radius: 10px;
+}
+
+.skeleton-card {
+  height: 120px;
+}
+
+.skeleton-card.is-short {
+  height: 80px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.loading {
+  padding: 56px 0 24px;
+}
+
+/* ===== 타로 반짝이 · 카드 나눠주기 ===== */
+.tarot-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tarot-burst span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #e9c46a;
+  font-size: 18px;
+  opacity: 0;
+  animation: burst 1s ease-out forwards;
+  --angle: calc(var(--i) * 45deg);
+}
+
+.tarot-burst span:nth-child(even) {
+  color: #ff8fb1;
+}
+
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-110px) scale(1.2);
+  }
+}
+
+.deck-card {
+  animation: deal 0.45s cubic-bezier(0.2, 1.2, 0.4, 1) both;
+  animation-delay: calc(var(--i, 0) * 25ms);
+}
+
+@keyframes deal {
+  0% {
+    transform: translateY(-30px) rotate(-8deg) scale(0.8);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.deck-card.is-picked {
+  animation: none;
+}
+
+/* ===== 홈: 연속 방문 · 알림 ===== */
+.my-card-badges {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.streak-badge {
+  padding: 2px 10px;
+  border-radius: var(--rounded-lg);
+  background: #fff1e6;
+  color: #ff7a2f;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.notify-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: var(--rounded-md);
+  background: var(--sky);
+}
+
+.notify-emoji {
+  font-size: 28px;
+}
+
+/* ===== 운세 기록 ===== */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 16px 8px;
+  border-radius: 18px;
+  background: var(--grey100);
+}
+
+.stat-value {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.stat-label {
+  color: var(--grey600);
+  font-size: 12px;
+}
+
+.cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cal-title {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.cal-nav {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-weekday {
+  padding: 4px 0;
+  color: var(--grey500);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cal-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--grey700);
+  cursor: pointer;
+  font: inherit;
+}
+
+.cal-day.is-visited {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.cal-day.is-today .cal-num {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cal-day.is-selected {
+  box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+.cal-num {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cal-mark {
+  min-height: 14px;
+  color: var(--lavender-deep);
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.cal-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 0;
+  color: var(--grey500);
+  font-size: 12px;
+}
+
+.cal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--primary-light);
+}
+
+.log-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-top: 1px solid var(--grey200);
+}
+
+.log-row:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.log-label {
+  color: var(--grey500);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.log-value {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ===== 캐릭터 도감 ===== */
+.progress {
+  height: 10px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: var(--rounded-lg);
+  background: var(--grey100);
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--rounded-lg);
+  background: linear-gradient(90deg, #ffb3c9, var(--primary));
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.collection-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  border-radius: 14px;
+  background: var(--white);
+  opacity: 0.55;
+}
+
+.collection-item.is-got {
+  opacity: 1;
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.collection-emoji {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--grey400);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.collection-name {
+  color: var(--grey700);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.collection-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 0 5px;
+  border-radius: 6px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+/* ===== 프리미엄 잠금 ===== */
+.card.locked {
+  position: relative;
+  overflow: hidden;
+}
+
+.locked-preview {
+  margin: 0;
+  color: var(--grey700);
+  font-size: 15px;
+  filter: blur(5px);
+  user-select: none;
+}
+
+.locked-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.locked-icon {
+  font-size: 24px;
+}
+
+.locked-button {
+  min-height: 46px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: var(--rounded-lg);
+  background: var(--ink);
+  color: var(--page);
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.locked-button:disabled {
+  opacity: 0.6;
+}
+
+.month-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.month-row {
+  display: grid;
+  grid-template-columns: 40px 76px 1fr;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.month-num {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.month-score {
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.month-note {
+  color: var(--grey700);
+}
+
+.deep-keywords {
+  color: var(--lavender-deep);
+  font-weight: 700;
+}
+
+/* ===== 첫 실행 소개 ===== */
+.onboarding {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 120px;
+}
+
+.onboarding-skip {
+  align-self: flex-end;
+  margin-top: 12px;
+  padding: 8px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--grey500);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+}
+
+.onboarding-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  animation: pop-in 0.4s ease both;
+}
+
+.onboarding-emoji {
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  font-size: 76px;
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+.onboarding-title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-cute);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.onboarding-desc {
+  max-width: 300px;
+  margin: 4px 0 0;
+  color: var(--grey700);
+  font-size: 16px;
+}
+
+.onboarding-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--rounded-lg);
+  background: var(--grey200);
+  transition: width 0.2s ease;
+}
+
+.dot.is-active {
+  width: 24px;
+  background: var(--primary);
+}
+
+/* ===== 다크 모드 ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #17121b;
+    --white: #241c29;
+    --ink: #f4edf2;
+    --grey100: #1f1824;
+    --grey200: #352b3b;
+    --grey400: #6d5f73;
+    --grey500: #9a8a9f;
+    --grey600: #b3a4b7;
+    --grey700: #cdbfcf;
+    --primary-light: #3a2030;
+    --primary-shadow: rgba(255, 92, 138, 0.35);
+
+    --lavender: #2a2240;
+    --lavender-deep: #b39cff;
+    --peach: #3a2a22;
+    --pink: #3a1f2b;
+    --pink-deep: #ff86a8;
+    --mint: #1d3029;
+    --mint-deep: #4fd6a2;
+    --butter: #3a3320;
+    --sky: #1d2a3a;
+  }
+
+  body {
+    background: var(--page);
+  }
+
+  @media (min-width: 481px) {
+    body {
+      background-color: #0e0b11;
+    }
+  }
+
+  .my-card {
+    background: linear-gradient(135deg, #3a1f2b, #3a2a22);
+  }
+
+  .tarot-teaser {
+    background: linear-gradient(135deg, #2a2240, #221b33);
+  }
+
+  .hl {
+    background: linear-gradient(transparent 62%, #5a2840 62%);
+  }
+
+  .sparkles span {
+    opacity: 0.5;
+  }
+
+  .toast {
+    background: rgba(244, 237, 242, 0.92);
+    color: #17121b;
+  }
+
+  .streak-badge {
+    background: #3a2a22;
+    color: #ffa36b;
+  }
+
+  .tarot-front {
+    background: linear-gradient(170deg, #fffaf2, #efe4ff);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-card,
+  .tarot-burst span,
+  .skeleton {
+    animation: none !important;
+  }
+}
+
+.error-box {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #fff0f3;
+  color: #e5484d;
+  font-size: 14px;
+  font-weight: 600;
+}
